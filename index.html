@@ -1,0 +1,42 @@
+< !DOCTYPE html >
+    <html>
+        <head>
+            <title>DeuceHigh</title>
+            <script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
+        </head>
+
+        <body>
+        blah blah blah...deucehigh flag
+        <script>
+            var user = {
+                "firstName": "Joe",
+                "lastName": "Ghio",
+                "key": "joeghio@gmail.com"
+                "custom": {
+                "groups": "beta_testers"
+                }
+            };
+      
+            var div = document.createElement('div');
+            document.body.appendChild(div);
+      
+            div.appendChild(document.createTextNode('Initializing...'));
+      
+            var ldclient = LDClient.initialize('5d012d28fbf7870758553cf3', user);
+      
+            function render() {
+                var shouldShow = ldclient.variation('deucehigh', false);
+                var label = (shouldShow ? 'Showing' : 'Not showing') + ' your feature to ' + user.key;
+                div.replaceChild(document.createTextNode(label), div.firstChild);
+            }
+        
+            ldclient.on('ready', render);
+            ldclient.on('change', render);
+        </script>
+    </body>
+
+    </html>
+           
+
+           
+    
